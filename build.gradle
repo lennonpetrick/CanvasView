@@ -19,7 +19,7 @@ android {
         minSdkVersion 15
         targetSdkVersion 26
         archivesBaseName = "canvas-view"
-        version = 1.0
+        version = 1.1
     }
     sourceSets {
         main {
@@ -37,7 +37,7 @@ uploadArchives {
                         userName: '$nexusUser',
                         password: '$nexusPassword')
             }
-            pom.version = '1.0'
+            pom.version = '1.1'
             pom.groupId = 'canvas-view'
             pom.artifactId = 'canvas-view'
         }
