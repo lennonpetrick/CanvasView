@@ -236,7 +236,6 @@ public class CanvasView extends View {
                 return;
             }
 
-            this.textPaint = this.createPaint();
             float textX = text.getTextX();
             float textY = text.getTextY();
 
@@ -259,9 +258,9 @@ public class CanvasView extends View {
                     substring = text.getText().substring(i, len);
                 }
 
-                y += this.fontSize;
+                y += text.getPaint().getTextSize();
 
-                canvas.drawText(substring, textX, y, this.textPaint);
+                canvas.drawText(substring, textX, y, text.getPaint());
             }
         }
     }
@@ -297,6 +296,7 @@ public class CanvasView extends View {
             case TEXT:
                 currentText.setTextX(event.getX());
                 currentText.setTextY(event.getY());
+                currentText.getPaint().setColor(getPaintStrokeColor());
 
                 break;
             default:
@@ -376,6 +376,7 @@ public class CanvasView extends View {
             case TEXT:
                 currentText.setTextX(x);
                 currentText.setTextY(y);
+                currentText.getPaint().setColor(getPaintStrokeColor());
                 break;
             default:
                 break;
@@ -597,7 +598,8 @@ public class CanvasView extends View {
      * @param text
      */
     public void addText(String text) {
-        currentText = new Text(text);
+        Paint paint = createPaint();
+        currentText = new Text(text, paint);
         this.textList.add(currentText);
     }
 
@@ -635,6 +637,10 @@ public class CanvasView extends View {
      */
     public void setPaintStrokeColor(int color) {
         this.paintStrokeColor = color;
+        if (this.mode == Mode.TEXT) {
+            currentText.getPaint().setColor(color);
+            invalidate();
+        }
     }
 
     /**
