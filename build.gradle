@@ -4,8 +4,8 @@ apply plugin: 'maven-publish'
 
 // version information
 def versionMajor = 1 // major
-def versionMinor = 4 // minor
-def versionPatch = 1 // revision
+def versionMinor = 5 // minor
+def versionPatch = 0 // revision
 
 ext {
     version_name = "${versionMajor}.${versionMinor}.${versionPatch}"

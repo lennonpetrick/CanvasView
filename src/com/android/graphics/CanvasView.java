@@ -71,6 +71,8 @@ public class CanvasView extends View {
     private float startY = 0F;
     private float controlX = 0F;
     private float controlY = 0F;
+    private float drawStartTop = 0F,
+                  drawStartLeft = 0F;
 
     /**
      * Copy Constructor
@@ -409,7 +411,7 @@ public class CanvasView extends View {
         canvas.drawColor(this.baseColor);
 
         if (this.bitmap != null) {
-            canvas.drawBitmap(this.bitmap, 0F, 0F, emptyPaint);
+            canvas.drawBitmap(this.bitmap, drawStartLeft, drawStartTop, emptyPaint);
         }
 
         for (int i = 0; i < this.historyPointer; i++) {
@@ -873,6 +875,18 @@ public class CanvasView extends View {
      */
     public byte[] getBitmapAsByteArray() {
         return this.getBitmapAsByteArray(CompressFormat.PNG, 100);
+    }
+
+    /**
+     * This method is setter for the start positions (x, y)
+     * of bitmap being drawn.
+     *
+     * @param left The position of the left side of the bitmap being drawn
+     * @param top The position of the top side of the bitmap being drawn
+     */
+    public void setDrawStartPosition(float left, float top) {
+        this.drawStartLeft = left;
+        this.drawStartTop = top;
     }
 
     // Enumeration for Mode
